@@ -192,7 +192,7 @@ body {
 /* Media Queries para dispositivos móviles */
 @media (max-width: 768px) {
     .card {
-        width: 90%;
+        width: 80%;
         height: 40%px;
     }
 

@@ -6,23 +6,19 @@ let isDragging = false;
 let startY = 0;
 const threshold = 50; // Ajusta este valor para cambiar la sensibilidad del arrastre
 
-dragHandle.addEventListener('mousedown', (e) => {
+function startDrag(e) {
     isDragging = true;
-    startY = e.clientY;
-    dragHandle.style.cursor = 'grabbing';
+    startY = e.clientY || e.touches[0].clientY;
+    if (e.type === 'mousedown') {
+        dragHandle.style.cursor = 'grabbing';
+        dragHandleBack.style.cursor = 'grabbing';
+    }
     createHearts();
-});
+}
 
-dragHandleBack.addEventListener('mousedown', (e) => {
-    isDragging = true;
-    startY = e.clientY;
-    dragHandleBack.style.cursor = 'grabbing';
-    createHearts();
-});
-
-document.addEventListener('mousemove', (e) => {
+function onDrag(e) {
     if (isDragging) {
-        const currentY = e.clientY;
+        const currentY = e.clientY || e.touches[0].clientY;
         if (startY - currentY > threshold) { // Arrastrar hacia arriba
             card.classList.add('flipped');
             isDragging = false;
@@ -33,13 +29,25 @@ document.addEventListener('mousemove', (e) => {
             dragHandleBack.style.cursor = 'grab';
         }
     }
-});
+}
 
-document.addEventListener('mouseup', () => {
+function endDrag() {
     isDragging = false;
     dragHandle.style.cursor = 'grab';
     dragHandleBack.style.cursor = 'grab';
-});
+}
+
+dragHandle.addEventListener('mousedown', startDrag);
+dragHandle.addEventListener('touchstart', startDrag);
+
+dragHandleBack.addEventListener('mousedown', startDrag);
+dragHandleBack.addEventListener('touchstart', startDrag);
+
+document.addEventListener('mousemove', onDrag);
+document.addEventListener('touchmove', onDrag);
+
+document.addEventListener('mouseup', endDrag);
+document.addEventListener('touchend', endDrag);
 
 function createHearts() {
     for (let i = 0; i < 20; i++) { // Ajusta este valor para cambiar la cantidad de corazones
