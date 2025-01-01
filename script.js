@@ -62,3 +62,13 @@ function createHearts() {
         }, 3000); // Ajusta este valor para cambiar la duración de los corazones (en milisegundos)
     }
 }
+
+function downloadImage() {
+    const image = document.getElementById('card-image');
+    const link = document.createElement('a');
+    link.href = image.src;
+    link.download = 'amoremio.png';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}

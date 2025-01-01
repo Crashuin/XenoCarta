@@ -124,9 +124,20 @@ body {
     display: flex; /* Muestra el drag-handle-back cuando la carta está volteada */
 }
 
+.image-container {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 10px; /* Opcional: Añade bordes redondeados al contenedor */
+}
+
 .card-back img {
     max-width: 100%;
     height: auto;
+    border-radius: 10px; /* Opcional: Añade bordes redondeados a la imagen */
 }
 
 .card.flipped .card-front {
@@ -192,8 +203,8 @@ body {
 /* Media Queries para dispositivos móviles */
 @media (max-width: 768px) {
     .card {
-        width: 80%;
-        height: 40%px;
+        width: 90%;
+        height: auto;
     }
 
     .card-front, .card-back {
@@ -210,4 +221,31 @@ body {
         height: 40px;
         font-size: 12px;
     }
+
+    .image-container {
+        width: 100%;
+        height: auto;
+    }
+
+    .card-back img {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+/* Estilos para el botón de descarga */
+.download-button {
+    background-color: #6e3482;
+    color: #fffafa;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.download-button:hover {
+    background-color: #49225b;
 }
