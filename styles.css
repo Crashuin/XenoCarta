@@ -1,0 +1,213 @@
+body {
+    font-family: "Playwrite AU SA", serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-image: radial-gradient(circle, #ab84cb, #bb91ce, #c99fd3, #d6aed7, #e1bddd);
+    overflow: hidden; /* Asegura que los elementos no causen scroll */
+    user-select: none; /* Evita la selección de texto */
+    position: relative; /* Necesario para posicionar las estrellas y cometas */
+}
+
+.card {
+    position: relative;
+    width: 650px;
+    height: 420px;
+    perspective: 1000px;
+    border-radius: 15px;
+    padding: 10px;
+    transition: transform 0.3s ease-in-out; /* Añade la transición aquí */
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px; 
+    transition: transform 0.6s ease-in-out;
+    overflow: hidden; /* Asegura que el contenido no se salga de los límites */
+}
+
+.card-front {
+    background-color: #49225b;
+    border: 1px solid #6e3482;
+    display: flex;
+    flex-direction: column; 
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    padding: 20px; 
+}
+
+.card-back {
+    background-color: #49225b;
+    border: 1px solid #6e3482;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transform: rotateX(180deg);
+    padding: 20px;
+}
+
+.front-text {
+    font-size: 18px;
+    color: #fffafa; 
+    text-align: center;
+    overflow-y: auto; /* Añade scroll vertical */
+    max-height: 100%; /* Asegura que el contenido no se salga de los límites */
+    padding-right: 10px; /* Añade espacio para el scroll */
+}
+
+/* Estilos personalizados para el scroll */
+.front-text::-webkit-scrollbar {
+    width: 12px;
+}
+
+.front-text::-webkit-scrollbar-track {
+    background: #6e3482;
+    border-radius: 10px;
+}
+
+.front-text::-webkit-scrollbar-thumb {
+    background: #d6c876;
+    border-radius: 10px;
+    border: 3px solid #6e3482; /* Añade un borde alrededor del thumb */
+}
+
+.front-text::-webkit-scrollbar-thumb:hover {
+    background: #b5a56a;
+}
+
+.drag-handle, .drag-handle-back {
+    width: 30%;
+    height: 30px;
+    background-color: #6e3482;
+    color: #fffafa; 
+    cursor: grab;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    font-size: 14px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    animation: bounce 2s infinite; /* Añade animación de rebote */
+}
+
+.drag-handle p, .drag-handle-back p {
+    margin: 0;
+    font-size: 16px;
+    color: #fffafa; 
+}
+
+.drag-handle {
+    margin-top: auto;
+}
+
+.drag-handle-back {
+    margin-top: auto;
+    display: none; /* Oculta el drag-handle-back por defecto */
+}
+
+.card.flipped .drag-handle-back {
+    display: flex; /* Muestra el drag-handle-back cuando la carta está volteada */
+}
+
+.card-back img {
+    max-width: 100%;
+    height: auto;
+}
+
+.card.flipped .card-front {
+    transform: rotateX(-180deg);
+}
+
+.card.flipped .card-back {
+    transform: rotateX(0deg);
+}
+
+.heart {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #d6c876;
+    transform: rotate(-45deg);
+    animation: float 1s ease-in-out infinite;
+}
+
+.heart::before,
+.heart::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #d6c876;
+    border-radius: 50%;
+}
+
+.heart::before {
+    top: -10px;
+    left: 0;
+}
+
+.heart::after {
+    top: 0;
+    left: 10px;
+}
+
+@keyframes float {
+    0% {
+        opacity: 1;
+        transform: translateY(0) rotate(-45deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-100px) rotate(-45deg);
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Media Queries para dispositivos móviles */
+@media (max-width: 768px) {
+    .card {
+        width: 90%;
+        height: 40%px;
+    }
+
+    .card-front, .card-back {
+        padding: 10px;
+    }
+
+    .front-text {
+        font-size: 16px;
+        padding-right: 5px;
+    }
+
+    .drag-handle, .drag-handle-back {
+        width: 50%;
+        height: 40px;
+        font-size: 12px;
+    }
+}
