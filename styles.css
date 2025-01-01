@@ -204,7 +204,7 @@ body {
 @media (max-width: 768px) {
     .card {
         width: 90%;
-        height: auto;
+        height: 35%;
     }
 
     .card-front, .card-back {
